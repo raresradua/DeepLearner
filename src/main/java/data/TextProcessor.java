@@ -15,6 +15,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to vectorize text by tokenizing and then using word2vec model on the tokens
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class TextProcessor {
     TokenizerFactory tokenizerFactory;
     Word2Vec word2Vec;
@@ -24,6 +28,13 @@ public class TextProcessor {
         tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
         word2Vec = WordVectorSerializer.readWord2VecModel(new File(word2vecPath));
     }
+
+    /**
+     * @param texts list of strings to be vectorized
+     * @param category categories of each text (for labeled data used in training), doesn't matter when predicting
+     * @param truncateLength length to which to truncate each text to
+     * @return DataSet to be passed to the model
+     */
     public DataSet vectorizeText(List<String> texts, int[] category, int truncateLength) {
         List<List<String>> allTokens= new ArrayList<>(texts.size());
         int maxLength = 0;

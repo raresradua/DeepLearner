@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * Used to laod or download (if not already) a pre-trained Word2Vec model created by Google, to be used for vectorizing text
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class Word2Vec {
 
     private static String wordVectorsPath;

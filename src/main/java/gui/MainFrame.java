@@ -2,6 +2,10 @@ package gui;
 
 import javax.swing.*;
 
+/**
+ * Basic GUI of the application
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class MainFrame extends JFrame {
     JLabel textAreaLabel, classificationLabel, infoLabel;
     JScrollPane scrollPane;

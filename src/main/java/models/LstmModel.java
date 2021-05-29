@@ -24,13 +24,23 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model used to classify fake news, following LSTM architecture
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class LstmModel {
-
     private MultiLayerNetwork network;
     private String dataPath = "";
     private TextProcessor textProcessor;
     private List<String> categories;
 
+    /**
+     * @param dataPath root path of the data folders (train and test)
+     * @param categoriesPath path of the categories file (0, false and 1, true)
+     * @param wordVectorsPath path of the Word2Vec model
+     * @param vectorSize number of dimensions of the Word2Vec model
+     * @param seed seed to be passed to the model for randomness
+     */
     public LstmModel(String dataPath, String categoriesPath, String wordVectorsPath, int vectorSize, int seed) {
         Nd4j.getMemoryManager().setAutoGcWindow(10000);
 
@@ -67,8 +77,12 @@ public class LstmModel {
         return textProcessor;
     }
 
+    /**
+     * @param batchSize batchSize to use for training the model
+     * @param epochsNo number of epochs to use for training the model
+     * @param savePath path where to save the trained model
+     */
     public void train(int batchSize, int epochsNo, String savePath){
-
         Iterator trainIterator = new Iterator.Builder()
                 .dataDirectory(this.dataPath)
                 .textProcessor(textProcessor)
@@ -103,6 +117,10 @@ public class LstmModel {
         }
     }
 
+    /**
+     * @param text text to classify
+     * @return true or fake
+     */
     public String predict(String text) {
         DataSet processedText = textProcessor.vectorizeText(text, 256);
         INDArray features = processedText.getFeatures();
@@ -121,6 +139,9 @@ public class LstmModel {
         return categories.get(pos).split(",")[1];
     }
 
+    /**
+     * @param modelPath path to load the model from
+     */
     public void loadModel(String modelPath) {
         try {
             this.network = MultiLayerNetwork.load(new File(modelPath), true);
@@ -130,6 +151,9 @@ public class LstmModel {
         }
     }
 
+    /**
+     * @param categoriesPath path to load the categories from
+     */
     public void loadCategories(String categoriesPath){
         File categoriesFile = new File(categoriesPath);
         try (BufferedReader brCategories = new BufferedReader(new FileReader(categoriesFile))){

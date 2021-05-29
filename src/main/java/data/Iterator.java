@@ -21,6 +21,10 @@ import java.util.NoSuchElementException;
 import static org.nd4j.linalg.indexing.NDArrayIndex.all;
 import static org.nd4j.linalg.indexing.NDArrayIndex.point;
 
+/**
+ * Custom iterator for the Fake News Dataset, used by the model
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class Iterator implements DataSetIterator {
     private final int batchSize;
     private final int vectorSize;

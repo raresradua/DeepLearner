@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Class with main method. We use it for training our model.
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class Train {
     public static void main(String[] args) {
         String resourcePath = Paths.get("src", "main", "resources").toString();

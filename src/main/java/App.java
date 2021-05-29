@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Main class. Initializes the GUI and loads the trained model, then predicts news given by the user.
+ * @author Vlad Cociorva & Rares Radu
+ */
 public class App {
     public static void main(String[] args) {
         MainFrame mainFrame = new MainFrame();
